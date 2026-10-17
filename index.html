@@ -1,1 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rashid Ongoma | Software Developer Portfolio</title>
+<meta name="description" content="Portfolio of Rashid Ongoma, a Kenya-based developer building Django business systems, GIS decision tools and offline AI apps.">
+<style>
+:root{--bg:#f5f2ea;--surface:#fffdf8;--text:#1c2420;--muted:#5d6a62;--accent:#1e5a43;--accent-ink:#ffffff;--warm:#b8641c;--line:#ddd6c6;--tint:#e9efe6;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101613;--surface:#18211c;--text:#e9eee9;--muted:#98a89e;--accent:#6fcf9f;--accent-ink:#0c1a13;--warm:#e8a15f;--line:#2a372f;--tint:#1f2b25;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#101613;--surface:#18211c;--text:#e9eee9;--muted:#98a89e;--accent:#6fcf9f;--accent-ink:#0c1a13;--warm:#e8a15f;--line:#2a372f;--tint:#1f2b25;color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+a{color:var(--accent)}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.2;margin:0}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;flex-wrap:wrap}
+.brand{font-family:Georgia,serif;font-weight:700;font-size:1.1rem;color:var(--text);text-decoration:none}
+.bar nav{display:flex;gap:4px 18px;flex-wrap:wrap}
+.bar nav a{color:var(--muted);text-decoration:none;font-size:.95rem;font-weight:600;padding:6px 0}
+.bar nav a:hover,.bar nav a:focus-visible{color:var(--accent)}
+.hero{padding:72px 0 56px}
+.eyebrow{color:var(--warm);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.8rem;margin:0 0 14px}
+.hero h1{font-size:clamp(2.2rem,6.5vw,3.8rem);max-width:15ch}
+.hero p.lead{font-size:1.2rem;color:var(--muted);max-width:56ch;margin:18px 0 28px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 22px;border-radius:8px;font-weight:700;text-decoration:none;border:2px solid var(--accent)}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{color:var(--accent)}
+.btn:hover{opacity:.88}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:44px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.stat b{display:block;font-family:Georgia,serif;font-size:1.4rem;color:var(--accent)}
+.stat span{color:var(--muted);font-size:.9rem}
+section{padding:56px 0;border-top:1px solid var(--line)}
+section>.wrap>h2{font-size:clamp(1.6rem,4vw,2.1rem);margin-bottom:8px}
+.sub{color:var(--muted);margin:0 0 28px;max-width:60ch}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px;display:flex;flex-direction:column}
+.card h3{font-size:1.25rem}
+.tag{align-self:flex-start;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--warm);margin-bottom:10px}
+.card p{margin:10px 0;color:var(--text)}
+.card ul{margin:4px 0 12px;padding-left:20px;color:var(--muted);font-size:.95rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:auto 0 14px;padding-top:6px}
+.chips span{background:var(--tint);color:var(--accent);font-size:.8rem;font-weight:600;padding:3px 10px;border-radius:999px}
+.card a.more{font-weight:700;text-decoration:none}
+.card a.more:hover{text-decoration:underline}
+.two{display:grid;grid-template-columns:1.1fr 1fr;gap:36px}
+.two p{margin:0 0 14px}
+.skills{display:grid;gap:14px}
+.skills div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.skills b{display:block;margin-bottom:2px}
+.skills span{color:var(--muted);font-size:.94rem}
+.tl{list-style:none;margin:0;padding:0;border-left:3px solid var(--accent)}
+.tl li{position:relative;padding:0 0 28px 24px}
+.tl li::before{content:"";position:absolute;left:-9px;top:6px;width:15px;height:15px;border-radius:50%;background:var(--bg);border:3px solid var(--warm)}
+.tl h3{font-size:1.1rem}
+.tl .when{color:var(--warm);font-weight:700;font-size:.85rem;letter-spacing:.04em}
+.tl p{margin:4px 0 0;color:var(--muted);font-size:.97rem}
+.contact{background:var(--accent);color:var(--accent-ink);border-radius:16px;padding:40px 28px;margin:56px 0}
+.contact h2{margin-bottom:10px}
+.contact p{margin:0 0 20px;max-width:52ch}
+.contact .links{display:flex;flex-wrap:wrap;gap:10px}
+.contact a{color:var(--accent-ink);border:2px solid var(--accent-ink);border-radius:8px;padding:10px 18px;font-weight:700;text-decoration:none}
+.contact a:hover{background:var(--accent-ink);color:var(--accent)}
+footer{border-top:1px solid var(--line);padding:24px 0 36px;color:var(--muted);font-size:.9rem;text-align:center}
+a:focus-visible{outline:3px solid var(--warm);outline-offset:3px}
+@media (max-width:760px){.two{grid-template-columns:1fr;gap:24px}.hero{padding:48px 0 40px}.bar nav{gap:2px 14px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="bar">
+<div class="wrap">
+<a class="brand" href="#top">Rashid Ongoma</a>
+<nav aria-label="Main">
+<a href="#work">Work</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#path">Experience</a><a href="#contact">Contact</a>
+</nav>
+</div>
+</header>
+
+<main id="top">
+<div class="wrap hero">
+<p class="eyebrow">Software Developer | Kenya</p>
+<h1>Software built for real businesses and communities.</h1>
+<p class="lead">I build Django web platforms, GIS decision-support tools and offline AI apps, grounded in an agricultural engineering background and day-to-day business experience.</p>
+<div class="btns">
+<a class="btn primary" href="#work">View my work</a>
+<a class="btn ghost" href="#contact">Get in touch</a>
+</div>
+<div class="stats">
+<div class="stat"><b>4</b><span>Products built and in progress</span></div>
+<div class="stat"><b>2</b><span>Live deployed platforms</span></div>
+<div class="stat"><b>M-Pesa</b><span>Payment workflows</span></div>
+<div class="stat"><b>GIS + AI</b><span>Spatial and vision work</span></div>
+</div>
+</div>
+
+<section id="work">
+<div class="wrap">
+<h2>Selected work</h2>
+<p class="sub">Four projects spanning business systems, geospatial analysis, education technology and applied machine learning.</p>
+<div class="cards">
+
+<article class="card">
+<span class="tag">Deployed | GIS</span>
+<h3>ZION Land Check</h3>
+<p>A web application that helps land buyers explore land-use information and assess purchase risk on an interactive map.</p>
+<ul>
+<li>Raster data and proximity analysis for roads, rivers, wetlands and railways</li>
+<li>Django backend with Leaflet mapping</li>
+</ul>
+<div class="chips"><span>Python</span><span>Django</span><span>Leaflet</span><span>Raster analysis</span></div>
+<a class="more" href="https://zionmapping.pythonanywhere.com/" rel="noopener">Open live application</a>
+</article>
+
+<article class="card">
+<span class="tag">Deployed | Education</span>
+<h3>SomaSmart / ElimuPlus</h3>
+<p>A learning platform supporting Kenya’s Competency-Based Curriculum, designed to stay affordable and usable on limited connectivity.</p>
+<ul>
+<li>Student and tutor accounts, quizzes, submissions and results</li>
+<li>Subscriptions, class levels and M-Pesa STK Push payments</li>
+</ul>
+<div class="chips"><span>Python</span><span>Django</span><span>SQLite / MySQL</span><span>M-Pesa</span></div>
+<a class="more" href="https://somasmart.pythonanywhere.com/" rel="noopener">Open live platform</a>
+</article>
+
+<article class="card">
+<span class="tag">In development | AI</span>
+<h3>KUKU-PREDIKT</h3>
+<p>An offline mobile app that uses droppings images to help farmers identify common poultry diseases early.</p>
+<ul>
+<li>EfficientNet-B0 classifier for coccidiosis, Newcastle disease, salmonella, healthy and other</li>
+<li>On-device ONNX inference with confidence-based results</li>
+</ul>
+<div class="chips"><span>ONNX</span><span>EfficientNet-B0</span><span>Computer vision</span><span>React Native</span></div>
+</article>
+
+<article class="card">
+<span class="tag">Under testing | Business</span>
+<h3>BerryPOS</h3>
+<p>A point-of-sale system for a bakery, shaped by hands-on experience with orders, deliveries and payment follow-ups.</p>
+<ul>
+<li>Administrator and seller workflows with sales reports</li>
+<li>Online and offline M-Pesa STK Push payment handling</li>
+</ul>
+<div class="chips"><span>Python</span><span>Django</span><span>Relational databases</span><span>M-Pesa</span></div>
+</article>
+
+</div>
+<p class="sub" style="margin-top:22px">More source code is on <a href="https://github.com/YoungDevelopa" rel="noopener">GitHub</a>.</p>
+</div>
+</section>
+
+<section id="about">
+<div class="wrap two">
+<div>
+<h2>About</h2>
+<p>I am a software developer with a degree in Agricultural and Biosystems Engineering from Kenyatta University. That background shapes how I work: start from a real problem, understand the people and processes around it, then build something dependable.</p>
+<p>My projects come from direct needs, from a bakery counter to land buyers checking risk before they pay, to farmers who may have no signal when a flock gets sick.</p>
+<p>I am looking for a Python, Django, backend, full-stack or GIS software role where I can keep growing in applied AI and reliable engineering.</p>
+</div>
+<div>
+<h2 style="margin-bottom:14px">Education</h2>
+<div class="skills">
+<div><b>BSc Agricultural and Biosystems Engineering</b><span>Kenyatta University, Kenya. Studies September 2018 to December 2024. Graduated December 2025.</span></div>
+<div><b>Languages</b><span>English and Kiswahili</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="skills">
+<div class="wrap">
+<h2>Skills</h2>
+<p class="sub">The tools I use across web, mobile, spatial and AI work.</p>
+<div class="cards">
+<div class="skills" style="gap:12px">
+<div><b>Languages</b><span>Python, Java, Kotlin, JavaScript, C, MATLAB</span></div>
+<div><b>Web</b><span>Django, Flask, HTML5, CSS3, responsive design, REST APIs</span></div>
+<div><b>Databases</b><span>SQLite, MySQL, relational design, data modelling</span></div>
+<div><b>Mobile</b><span>Android, Kotlin, Jetpack Compose, React Native</span></div>
+</div>
+<div class="skills" style="gap:12px">
+<div><b>GIS and geospatial</b><span>Leaflet, raster analysis, remote sensing, spatial analysis, cartography</span></div>
+<div><b>AI and machine learning</b><span>Computer vision, ONNX, TensorFlow Lite, model integration</span></div>
+<div><b>Business systems</b><span>Point of sale, inventory, orders, M-Pesa STK Push, reporting</span></div>
+<div><b>Practices</b><span>Git, GitHub, migrations, debugging, testing, deployment, documentation</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="path">
+<div class="wrap">
+<h2>Experience</h2>
+<p class="sub">Professional and project-based roles.</p>
+<ul class="tl">
+<li><span class="when">2023 TO PRESENT</span><h3>Software Developer, Berry Cakes</h3><p>Building and maintaining BerryPOS: order management, sales recording, payment tracking, reporting and M-Pesa payment workflows.</p></li>
+<li><span class="when">PROJECT-BASED</span><h3>Software Developer and GIS Technologist, ZION Mapping</h3><p>Developed and deployed a Django and Leaflet land-use decision-support application using raster and proximity analysis.</p></li>
+<li><span class="when">PROJECT-BASED</span><h3>Software Developer, SomaSmart / ElimuPlus</h3><p>Developing a CBC-aligned learning platform with accounts, assessments, subscriptions and M-Pesa payments.</p></li>
+<li><span class="when">JAN TO MAY 2023</span><h3>Agricultural Engineering Attachment, FineTouch Africa</h3><p>Irrigation design support, quotations, field and installation reports, and sales operations.</p></li>
+<li><span class="when">JAN TO MAY 2022</span><h3>Engineering Attachment, JKUAT</h3><p>Practical exposure to technical and engineering operations, documentation and collaboration.</p></li>
+</ul>
+</div>
+</section>
+
+<div class="wrap">
+<div class="contact" id="contact">
+<h2>Let’s work together</h2>
+<p>Open to software development roles and project collaborations. The quickest way to reach me is email or phone.</p>
+<div class="links">
+<a href="mailto:rashidongoma@gmail.com">rashidongoma@gmail.com</a>
+<a href="tel:0745707598">0745707598</a>
+<a href="https://www.linkedin.com/in/rashid-ongoma/" rel="noopener">LinkedIn</a>
+<a href="https://github.com/YoungDevelopa" rel="noopener">GitHub</a>
+</div>
+</div>
+</div>
+</main>
+
+<footer><div class="wrap">Rashid Ongoma | Kenya | References available on request</div></footer>
+</body>
+</html>
 
