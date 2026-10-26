@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Rashid Ongoma | Software Developer</title>
 <meta name="description" content="Portfolio of Rashid Ongoma. I build Django platforms, GIS tools, and offline AI apps for Kenyan businesses and communities.">
+<script>document.documentElement.classList.add('js')</script>
 <style>
 :root{
   --bg:#f4f1e9;
@@ -158,6 +159,13 @@ h3{font-size:1.15rem;margin-bottom:4px}
 .ov-x:focus-visible{outline:3px solid var(--clay);outline-offset:2px}
 .ov-in{padding:16px}
 .ov-hint{margin:12px 2px 0;font-size:.8rem;color:var(--muted);text-align:center}
+
+/* Locked sections: hidden until unlocked from the terminal (visible if JS is off) */
+.js .locked{display:none}
+.reveal{animation:rise .5s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.reveal{animation:none}}
+.term-foot{padding:8px 14px;border-top:1px solid #27342c;background:#0e1512;color:#7f9286;font-size:12px}
 
 /* Section rhythm */
 section{padding:52px 0;border-top:1px solid var(--rule)}
@@ -334,10 +342,11 @@ footer{
         <span>$</span>
         <input id="tin" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Type a command, for example: work" placeholder="type: work">
       </label>
+      <div class="term-foot">Prefer to just scroll? <button class="lnk" type="button" data-cmd="all">show everything</button></div>
     </aside>
   </div>
 
-  <section id="work">
+  <section id="work" class="locked" data-sec="work">
     <div class="wrap">
       <h2>Selected work</h2>
       <p class="sub">Six projects — two live, two in testing, one in development, one in progress. Links are real.</p>
@@ -463,7 +472,7 @@ footer{
     </div>
   </section>
 
-  <section id="about">
+  <section id="about" class="locked" data-sec="about">
     <div class="wrap split">
       <div>
         <h2>About</h2>
@@ -487,7 +496,7 @@ footer{
     </div>
   </section>
 
-  <section id="skills">
+  <section id="skills" class="locked" data-sec="skills">
     <div class="wrap">
       <h2>Skills</h2>
       <p class="sub">The tools I use across web, mobile, spatial and AI work.</p>
@@ -520,7 +529,7 @@ footer{
     </div>
   </section>
 
-  <section id="experience">
+  <section id="experience" class="locked" data-sec="experience">
     <div class="wrap">
       <h2>Experience</h2>
       <p class="sub">Professional and project-based roles.</p>
@@ -564,7 +573,7 @@ footer{
     </div>
   </section>
 
-  <div class="wrap">
+  <div class="wrap locked" data-sec="contact">
     <div class="contact" id="contact">
       <h2>Let’s work together</h2>
       <p>Open to software development roles and project collaborations. The quickest way to reach me is email or phone.</p>
@@ -579,7 +588,7 @@ footer{
 
 </main>
 
-<footer>
+<footer class="locked" data-sec="footer">
   <div class="wrap">Rashid Ongoma | Software Developer | Kenya</div>
 </footer>
 
@@ -626,9 +635,28 @@ footer{
   function cmdLink(label, cmd) {
     return '<button class="lnk" type="button" data-cmd="' + esc(cmd) + '">' + esc(label) + '</button>';
   }
+  var sectionIds = ['work', 'about', 'skills', 'experience', 'contact'];
+  function unlock(id) {
+    var el = document.querySelector('[data-sec="' + id + '"]');
+    if (!el) return false;
+    var was = el.classList.contains('locked');
+    if (was) { el.classList.remove('locked'); el.classList.add('reveal'); }
+    var f = document.querySelector('[data-sec="footer"]');
+    if (f && f.classList.contains('locked')) { f.classList.remove('locked'); f.classList.add('reveal'); }
+    return was;
+  }
   function go(id) {
+    var was = unlock(id);
     var s = document.getElementById(id);
     if (s) s.scrollIntoView({ behavior: 'smooth' });
+    return was;
+  }
+  function showAll() { sectionIds.forEach(unlock); }
+  function hideAll() {
+    [].slice.call(document.querySelectorAll('[data-sec]')).forEach(function (el) {
+      el.classList.add('locked'); el.classList.remove('reveal');
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   function list() {
     projects.forEach(function (p) {
@@ -679,7 +707,7 @@ footer{
   });
 
   /* Commands */
-  var names = ['help', 'work', 'projects', 'open', 'about', 'skills', 'experience', 'contact', 'github', 'linkedin', 'theme', 'clear'];
+  var names = ['help', 'work', 'projects', 'open', 'about', 'skills', 'experience', 'contact', 'github', 'linkedin', 'theme', 'all', 'hide', 'clear'];
 
   function run(raw) {
     var parts = raw.trim().split(/\s+/),
@@ -699,14 +727,15 @@ footer{
          'experience   where I have worked',
          'contact      get in touch',
          'github / linkedin',
+         'all          show the whole site',
+         'hide         lock it all again',
          'theme        switch light / dark',
          'clear        wipe this screen'
         ].forEach(function (l) { print('  ' + l); });
         break;
 
       case 'work':
-        go('work');
-        print('scrolling to my work...', 'ok');
+        print(go('work') ? 'unlocking my work...' : 'scrolling to my work...', 'ok');
         print('Type projects to list them, or open 1.', 'dim');
         break;
 
@@ -723,8 +752,7 @@ footer{
         break;
 
       case 'about': case 'skills': case 'experience': case 'contact':
-        go(cmd);
-        print('scrolling to ' + cmd + '...', 'ok');
+        print((go(cmd) ? 'unlocking ' : 'scrolling to ') + cmd + '...', 'ok');
         break;
 
       case 'github':
@@ -742,6 +770,16 @@ footer{
             cur = r.dataset.theme || (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
         r.dataset.theme = cur === 'dark' ? 'light' : 'dark';
         print('theme: ' + r.dataset.theme, 'ok');
+        break;
+
+      case 'all': case 'show': case 'reveal':
+        showAll();
+        print('everything is unlocked. Scroll away.', 'ok');
+        break;
+
+      case 'hide': case 'lock':
+        hideAll();
+        print('sections locked again. Type work to start.', 'dim');
         break;
 
       case 'clear':
@@ -778,9 +816,18 @@ footer{
     if (!window.getSelection().toString()) input.focus({ preventScroll: true });
   });
 
+  /* Nav links and hero buttons unlock their section too */
+  [].slice.call(document.querySelectorAll('a[href^="#"]')).forEach(function (a) {
+    var id = a.getAttribute('href').slice(1);
+    if (sectionIds.indexOf(id) > -1) a.addEventListener('click', function (e) { e.preventDefault(); go(id); });
+  });
+  var h0 = location.hash.slice(1);
+  if (sectionIds.indexOf(h0) > -1) setTimeout(function () { go(h0); }, 0);
+
   print('Welcome. This site has a command line.', 'ok');
-  print('Type <b class="hot">work</b> and press Enter to see my projects,');
-  print('or type help to see everything you can ask.', 'dim');
+  print('The rest of the page stays hidden until you ask for it.');
+  print('Try: ' + sectionIds.map(function (n) { return cmdLink(n, n); }).join(' · '));
+  print('or type help. Type all to show everything.', 'dim');
 })();
 </script>
 
