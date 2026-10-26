@@ -215,7 +215,7 @@ footer{
   display:block;
   width:100%;
   height:auto;
-  aspect-ratio: 360 / 706; /* Fixes broken layout if images take a moment to load */
+  aspect-ratio: 360 / 706; /* Prevents layout shift while loading */
   object-fit: cover;
   border-radius:9px;
   border:1px solid var(--rule);
@@ -359,7 +359,7 @@ footer{
             <li>Sell, Products, Reports, Customers</li>
           </ul>
           
-          <!-- IMAGES POINTING TO THE /images/ FOLDER -->
+          <!-- IMAGES POINTING EXACTLY TO images/screenshotX.png -->
           <div class="shots">
             <figure>
               <img src="images/screenshot1.png" alt="Zion POS start screen offering a single-device offline mode or sign in and sync with a team" width="360" height="706" loading="lazy">
